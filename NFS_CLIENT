@@ -1,0 +1,28 @@
+################### Commands  ####################### 
+
+dnf install nfs-utils -y
+dnf install selinux-policy-devel -y
+getsebool -a |grep -e nfs
+dnf install nfs-utils nfs4-acl-tools -y
+showmount -e 192.168.29.251 >> nfs_client 
+mkdir -p /mnt/client_backup
+showmount -e 192.168.29.251
+systemctl enable --now nfs-client
+systemctl enable --now nfs-client.target
+systemctl enable --now nfsdcld.service
+systemctl enable --now nfs-mountd
+systemctl enable --now nfs-utils.service
+mount -t nfs 192.168.29.251:/mnt/backups /mnt/client_backup/
+mkdir -p /mnt/department/{finance,marketing,hr}
+mount -t nfs 192.168.29.251:/mnt/department/hr /mnt/department/hr
+mount -t nfs 192.168.29.251:/mnt/department/finance /mnt/department/finance
+mount -t nfs 192.168.29.251:/mnt/department/marketing /mnt/department/marketing
+mount -t nfs 192.168.29.251:/mnt/backups /mnt/client_backup/
+
+################### showmount -e 192.168.29.251 ####################### 
+
+Export list for 192.168.45.20:
+/mnt/backups              192.168.29.250/24
+/mnt/department/finance   192.168.29.0/24
+/mnt/department/marketing 192.168.29.0/24
+/mnt/department/hr        192.168.29.0/24

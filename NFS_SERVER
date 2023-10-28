@@ -1,0 +1,42 @@
+############################# nfs config ################################
+
+systemctl enable --now nfs-server.service 
+systemctl enable --now nfs-blkmap.service 
+systemctl enable --now nfs-dcld
+systemctl status nfsdcld.service 
+systemctl status nfs-idmapd.service 
+systemctl status nfs-mountd.service 
+systemctl status nfs-utils.service 
+systemctl status rpcbind.service 
+dnf install bind rpc -y
+dnf install bind -y
+dnf search rpc
+dnf install rpcbind -y
+dnf install sssd-nfs-idmap -y
+mkdir -p /mnt/depatments/{hr,marketing,finance}
+vi /etc/exports
+
+############################# /etc/exports ################################
+
+# File to tell which folder to share/mount on NFS
+/mnt/department/hr		192.168.29.0/24(rw,sync)
+/mnt/department/marketing	192.168.29.0/24(rw,sync)
+/mnt/department/finance		192.168.29.0/24(rw,sync)
+/mnt/backups			192.168.29.251/24(rw,sync,root_squash)
+
+############################# nfs config ################################
+
+exportfs -arv
+exportfs -s
+firewall-cmd --permanent --add-service=nfs --add-service=mountd --add-service=rpc-bind 
+firewall-cmd --reload 
+firewall-cmd --list-services 
+cd /mnt/department/
+touch hr/file1
+touch marketing/file2
+touch finance/file3
+touch ../backups/backup.file
+systemctl restart --now nfs-server.service
+systemctl restart --now nfs-blkmap.service 
+systemctl restart --now nfsdcld
+chmod 775 -R /mnt/department/
