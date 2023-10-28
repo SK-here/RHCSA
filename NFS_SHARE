@@ -1,0 +1,13 @@
+$  dnf install nfs-utils -y
+$  mkdir -p /srv/nfs/fun
+$  groupadd -g 12345 fun
+$  usermod -aG fun student 
+$  id student 
+$  chown nobody:fun /srv/nfs/fun/
+$  chmod g+s /srv/nfs/fun/
+$  vi /etc/exports
+$  firewall-cmd --permanent --add-service=nfs
+$  firewall-cmd --reload 
+$  systemctl enable --now nfs
+$  systemctl enable --now nfs-server.service 
+$  chmod  g+w /srv/nfs/fun/

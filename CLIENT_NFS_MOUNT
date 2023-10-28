@@ -1,0 +1,13 @@
+$  mkdir -p /mnt/nfs/fun
+$  dnf install nfs-utils -y
+$  groupadd -g 12345 fun
+$  usermod -aG fun student 
+$  mount -t nfs serverb.lab.example.com:/srv/nfs/fun /mnt/nfs/fun/
+$  mount -t nfs 192.168.45.52:/srv/nfs/fun /mnt/nfs/fun/
+$  exportfs -r
+$  touch /mnt/nfs/fun/file
+$  su - student # relogin to apply permissions
+$  id
+$  touch /mnt/nfs/fun/file
+$  mount -a
+$  df -Th
