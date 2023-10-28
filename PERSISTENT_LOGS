@@ -1,0 +1,112 @@
+############################################ Storing Journal Logs on Persistent Storage ####################################################
+
+
+############################################ Commands ####################################################
+Oct 15 14:59:53 localhost systemd-journald[233]: Runtime Journal (/run/log/journal/122dd4cc6ba14658a464244a1a3eabb8) is 8.0M, max 73.2M, 65.2M free.
+Oct 15 14:59:57 lab.example.com systemd-journald[625]: Runtime Journal (/run/log/journal/122dd4cc6ba14658a464244a1a3eabb8) is 8.0M, max 73.2M, 65.2M free.
+Oct 15 14:59:57 lab.example.com systemd-journald[625]: Runtime Journal (/run/log/journal/122dd4cc6ba14658a464244a1a3eabb8) is 8.0M, max 73.2M, 65.2M free.
+Oct 15 15:19:18 lab.example.com systemd-journald[4035]: Runtime Journal (/run/log/journal/122dd4cc6ba14658a464244a1a3eabb8) is 8.0M, max 73.2M, 65.2M free.
+Oct 15 15:19:34 lab.example.com systemd-journald[4052]: Runtime Journal (/run/log/journal/122dd4cc6ba14658a464244a1a3eabb8) is 8.0M, max 73.2M, 65.2M free.
+Oct 15 15:20:17 lab.example.com systemd-journald[4074]: Runtime Journal (/run/log/journal/122dd4cc6ba14658a464244a1a3eabb8) is 8.0M, max 73.2M, 65.2M free.
+Oct 15 15:22:10 lab.example.com systemd-journald[4166]: Runtime Journal (/run/log/journal/122dd4cc6ba14658a464244a1a3eabb8) is 8.0M, max 73.2M, 65.2M free.
+Oct 15 15:24:01 lab.example.com systemd-journald[4207]: Runtime Journal (/run/log/journal/122dd4cc6ba14658a464244a1a3eabb8) is 8.0M, max 73.2M, 65.2M free.
+Oct 15 15:24:36 lab.example.com sudo[4225]:  student : TTY=pts/0 ; PWD=/home/student ; USER=root ; COMMAND=/bin/mkdir -p /var/log/journal
+Oct 15 15:24:40 lab.example.com systemd-journald[4236]: Runtime Journal (/run/log/journal/122dd4cc6ba14658a464244a1a3eabb8) is 8.0M, max 73.2M, 65.2M free.
+Oct 15 15:25:05 lab.example.com systemd-journald[4255]: Runtime Journal (/run/log/journal/122dd4cc6ba14658a464244a1a3eabb8) is 8.0M, max 73.2M, 65.2M free.
+Oct 15 15:25:29 lab.example.com systemd-journald[4255]: Time spent on flushing to /var/log/journal/122dd4cc6ba14658a464244a1a3eabb8 is 23.064ms for 2279 entries.
+Oct 15 15:25:29 lab.example.com systemd-journald[4255]: System Journal (/var/log/journal/122dd4cc6ba14658a464244a1a3eabb8) is 8.0M, max 4.0G, 3.9G free.
+Oct 15 15:26:46 lab.example.com systemd-journald[4289]: System Journal (/var/log/journal/122dd4cc6ba14658a464244a1a3eabb8) is 16.0M, max 4.0G, 3.9G free.
+Oct 15 15:27:52 localhost systemd-journald[234]: Runtime Journal (/run/log/journal/122dd4cc6ba14658a464244a1a3eabb8) is 8.0M, max 73.2M, 65.2M free.
+Oct 15 15:27:56 lab.example.com systemd-journald[627]: Runtime Journal (/run/log/journal/122dd4cc6ba14658a464244a1a3eabb8) is 8.0M, max 73.2M, 65.2M free.
+Oct 15 15:27:56 lab.example.com systemd-journald[627]: Time spent on flushing to /var/log/journal/122dd4cc6ba14658a464244a1a3eabb8 is 34.317ms for 796 entries.
+Oct 15 15:27:56 lab.example.com systemd-journald[627]: System Journal (/var/log/journal/122dd4cc6ba14658a464244a1a3eabb8) is 16.0M, max 4.0G, 3.9G free.
+Oct 15 15:56:20 lab.example.com systemd-journald[3405]: System Journal (/var/log/journal/122dd4cc6ba14658a464244a1a3eabb8) is 16.0M, max 4.0G, 3.9G free.
+
+############################################ Commands ####################################################
+
+ 1   journalctl --no-pager | grep "log/journal" >> persistent_logs # default location of journal logs
+ 2   vi /etc/systemd/journald.conf # edit the config for persistent logs 
+ 3   mkdir -p /var/log/journal
+ 4   journalctl --flush
+ 5   systemctl restart systemd-journald
+ 6   systemctl status systemd-journald
+ 7   journalctl --no-pager | grep "/log/journal" >> persistent_logs
+
+############################################ Configuration /etc/systemd/journald.conf ####################################################
+
+#  This file is part of systemd.
+#
+#  systemd is free software; you can redistribute it and/or modify it under the
+#  terms of the GNU Lesser General Public License as published by the Free
+#  Software Foundation; either version 2.1 of the License, or (at your option)
+#  any later version.
+#
+# Entries in this file show the compile time defaults. Local configuration
+# should be created by either modifying this file, or by creating "drop-ins" in
+# the journald.conf.d/ subdirectory. The latter is generally recommended.
+# Defaults can be restored by simply deleting this file and all drop-ins.
+#
+# Use 'systemd-analyze cat-config systemd/journald.conf' to display the full config.
+#
+# See journald.conf(5) for details.
+
+[Journal]
+
+# Config for storing logs in persistent storage
+# Note: To store logs in persistent storage /var/log/journal must present
+Storage=persistent
+#Storage=auto
+#Compress=yes
+#Seal=yes
+#SplitMode=uid
+#SyncIntervalSec=5m
+#RateLimitIntervalSec=30s
+#RateLimitBurst=10000
+#SystemMaxUse=
+#SystemKeepFree=
+#SystemMaxFileSize=
+#SystemMaxFiles=100
+#RuntimeMaxUse=
+#RuntimeKeepFree=
+#RuntimeMaxFileSize=
+#RuntimeMaxFiles=100
+#MaxRetentionSec=
+#MaxFileSec=1month
+#ForwardToSyslog=no
+#ForwardToKMsg=no
+#ForwardToConsole=no
+#ForwardToWall=yes
+#TTYPath=/dev/console
+#MaxLevelStore=debug
+#MaxLevelSyslog=debug
+#MaxLevelKMsg=notice
+#MaxLevelConsole=info
+#MaxLevelWall=emerg
+#LineMax=48K
+#ReadKMsg=yes
+Audit=
+
+
+############################################ After Change ####################################################
+
+
+Oct 15 14:59:53 localhost systemd-journald[233]: Runtime Journal (/run/log/journal/122dd4cc6ba14658a464244a1a3eabb8) is 8.0M, max 73.2M, 65.2M free.
+Oct 15 14:59:57 lab.example.com systemd-journald[625]: Runtime Journal (/run/log/journal/122dd4cc6ba14658a464244a1a3eabb8) is 8.0M, max 73.2M, 65.2M free.
+Oct 15 14:59:57 lab.example.com systemd-journald[625]: Runtime Journal (/run/log/journal/122dd4cc6ba14658a464244a1a3eabb8) is 8.0M, max 73.2M, 65.2M free.
+Oct 15 15:19:18 lab.example.com systemd-journald[4035]: Runtime Journal (/run/log/journal/122dd4cc6ba14658a464244a1a3eabb8) is 8.0M, max 73.2M, 65.2M free.
+Oct 15 15:19:34 lab.example.com systemd-journald[4052]: Runtime Journal (/run/log/journal/122dd4cc6ba14658a464244a1a3eabb8) is 8.0M, max 73.2M, 65.2M free.
+Oct 15 15:20:17 lab.example.com systemd-journald[4074]: Runtime Journal (/run/log/journal/122dd4cc6ba14658a464244a1a3eabb8) is 8.0M, max 73.2M, 65.2M free.
+Oct 15 15:22:10 lab.example.com systemd-journald[4166]: Runtime Journal (/run/log/journal/122dd4cc6ba14658a464244a1a3eabb8) is 8.0M, max 73.2M, 65.2M free.
+Oct 15 15:24:01 lab.example.com systemd-journald[4207]: Runtime Journal (/run/log/journal/122dd4cc6ba14658a464244a1a3eabb8) is 8.0M, max 73.2M, 65.2M free.
+Oct 15 15:24:36 lab.example.com sudo[4225]:  student : TTY=pts/0 ; PWD=/home/student ; USER=root ; COMMAND=/bin/mkdir -p /var/log/journal
+Oct 15 15:24:40 lab.example.com systemd-journald[4236]: Runtime Journal (/run/log/journal/122dd4cc6ba14658a464244a1a3eabb8) is 8.0M, max 73.2M, 65.2M free.
+Oct 15 15:25:05 lab.example.com systemd-journald[4255]: Runtime Journal (/run/log/journal/122dd4cc6ba14658a464244a1a3eabb8) is 8.0M, max 73.2M, 65.2M free.
+Oct 15 15:25:29 lab.example.com systemd-journald[4255]: Time spent on flushing to /var/log/journal/122dd4cc6ba14658a464244a1a3eabb8 is 23.064ms for 2279 entries.
+Oct 15 15:25:29 lab.example.com systemd-journald[4255]: System Journal (/var/log/journal/122dd4cc6ba14658a464244a1a3eabb8) is 8.0M, max 4.0G, 3.9G free.
+Oct 15 15:26:46 lab.example.com systemd-journald[4289]: System Journal (/var/log/journal/122dd4cc6ba14658a464244a1a3eabb8) is 16.0M, max 4.0G, 3.9G free.
+Oct 15 15:27:52 localhost systemd-journald[234]: Runtime Journal (/run/log/journal/122dd4cc6ba14658a464244a1a3eabb8) is 8.0M, max 73.2M, 65.2M free.
+Oct 15 15:27:56 lab.example.com systemd-journald[627]: Runtime Journal (/run/log/journal/122dd4cc6ba14658a464244a1a3eabb8) is 8.0M, max 73.2M, 65.2M free.
+Oct 15 15:27:56 lab.example.com systemd-journald[627]: Time spent on flushing to /var/log/journal/122dd4cc6ba14658a464244a1a3eabb8 is 34.317ms for 796 entries.
+Oct 15 15:27:56 lab.example.com systemd-journald[627]: System Journal (/var/log/journal/122dd4cc6ba14658a464244a1a3eabb8) is 16.0M, max 4.0G, 3.9G free.
+Oct 15 15:56:20 lab.example.com systemd-journald[3405]: System Journal (/var/log/journal/122dd4cc6ba14658a464244a1a3eabb8) is 16.0M, max 4.0G, 3.9G free.
+Oct 15 16:02:47 lab.example.com systemd-journald[3446]: System Journal (/var/log/journal/122dd4cc6ba14658a464244a1a3eabb8) is 16.0M, max 4.0G, 3.9G free.
