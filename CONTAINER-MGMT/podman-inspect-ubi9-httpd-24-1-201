@@ -1,0 +1,147 @@
+[
+     {
+          "Id": "9bc4438c0d4b9fab1558c39e319727f107710a56093fd658dc8f60e3a07d9410",
+          "Digest": "sha256:f9b7c84ff26582d11c6d61294785bf5d65fa7cc82d23099b84a225cd23ade27c",
+          "RepoTags": [
+               "registry.redhat.io/ubi9/httpd-24:1-201"
+          ],
+          "RepoDigests": [
+               "registry.redhat.io/ubi9/httpd-24@sha256:a2d47970d75479784a2a41caf5c9fe8e37f3bb2bfb5625100e244f92653ae94c",
+               "registry.redhat.io/ubi9/httpd-24@sha256:f9b7c84ff26582d11c6d61294785bf5d65fa7cc82d23099b84a225cd23ade27c"
+          ],
+          "Parent": "",
+          "Comment": "",
+          "Created": "2022-06-22T16:58:20.684611Z",
+          "Config": {
+               "User": "1001",
+               "ExposedPorts": {
+                    "8080/tcp": {},
+                    "8443/tcp": {}
+               },
+               "Env": [
+                    "PATH=/opt/app-root/src/bin:/opt/app-root/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                    "container=oci",
+                    "SUMMARY=Platform for running Apache httpd 2.4 or building httpd-based application",
+                    "DESCRIPTION=Apache httpd 2.4 available as container, is a powerful, efficient, and extensible web server. Apache supports a variety of features, many implemented as compiled modules which extend the core functionality. These can range from server-side programming language support to authentication schemes. Virtual hosting allows one Apache installation to serve many different Web sites.",
+                    "STI_SCRIPTS_URL=image:///usr/libexec/s2i",
+                    "STI_SCRIPTS_PATH=/usr/libexec/s2i",
+                    "APP_ROOT=/opt/app-root",
+                    "HOME=/opt/app-root/src",
+                    "PLATFORM=el9",
+                    "HTTPD_VERSION=2.4",
+                    "HTTPD_CONTAINER_SCRIPTS_PATH=/usr/share/container-scripts/httpd/",
+                    "HTTPD_APP_ROOT=/opt/app-root",
+                    "HTTPD_CONFIGURATION_PATH=/opt/app-root/etc/httpd.d",
+                    "HTTPD_MAIN_CONF_PATH=/etc/httpd/conf",
+                    "HTTPD_MAIN_CONF_MODULES_D_PATH=/etc/httpd/conf.modules.d",
+                    "HTTPD_MAIN_CONF_D_PATH=/etc/httpd/conf.d",
+                    "HTTPD_TLS_CERT_PATH=/etc/httpd/tls",
+                    "HTTPD_VAR_RUN=/var/run/httpd",
+                    "HTTPD_DATA_PATH=/var/www",
+                    "HTTPD_DATA_ORIG_PATH=/var/www",
+                    "HTTPD_LOG_PATH=/var/log/httpd"
+               ],
+               "Entrypoint": [
+                    "container-entrypoint"
+               ],
+               "Cmd": [
+                    "/usr/bin/run-httpd"
+               ],
+               "WorkingDir": "/opt/app-root/src",
+               "Labels": {
+                    "architecture": "x86_64",
+                    "build-date": "2022-06-22T16:57:38.888525",
+                    "com.redhat.build-host": "cpt-1001.osbs.prod.upshift.rdu2.redhat.com",
+                    "com.redhat.component": "httpd-24-container",
+                    "com.redhat.license_terms": "https://www.redhat.com/en/about/red-hat-end-user-license-agreements#rhel",
+                    "description": "Apache httpd 2.4 available as container, is a powerful, efficient, and extensible web server. Apache supports a variety of features, many implemented as compiled modules which extend the core functionality. These can range from server-side programming language support to authentication schemes. Virtual hosting allows one Apache installation to serve many different Web sites.",
+                    "distribution-scope": "public",
+                    "io.k8s.description": "Apache httpd 2.4 available as container, is a powerful, efficient, and extensible web server. Apache supports a variety of features, many implemented as compiled modules which extend the core functionality. These can range from server-side programming language support to authentication schemes. Virtual hosting allows one Apache installation to serve many different Web sites.",
+                    "io.k8s.display-name": "Apache httpd 2.4",
+                    "io.openshift.expose-services": "8080:http,8443:https",
+                    "io.openshift.s2i.scripts-url": "image:///usr/libexec/s2i",
+                    "io.openshift.tags": "builder,httpd,httpd-24",
+                    "io.s2i.scripts-url": "image:///usr/libexec/s2i",
+                    "maintainer": "SoftwareCollections.org <sclorg@redhat.com>",
+                    "name": "rhel9/httpd-24",
+                    "release": "201",
+                    "summary": "Platform for running Apache httpd 2.4 or building httpd-based application",
+                    "url": "https://access.redhat.com/containers/#/registry.access.redhat.com/rhel9/httpd-24/images/1-201",
+                    "usage": "s2i build https://github.com/sclorg/httpd-container.git --context-dir=examples/sample-test-app/ rhel9/httpd-24 sample-server",
+                    "vcs-ref": "259c7eedd1c6772a827dbf4213e6c592ca509365",
+                    "vcs-type": "git",
+                    "vendor": "Red Hat, Inc.",
+                    "version": "1"
+               }
+          },
+          "Version": "1.13.1",
+          "Author": "",
+          "Architecture": "amd64",
+          "Os": "linux",
+          "Size": 386879034,
+          "VirtualSize": 386879034,
+          "GraphDriver": {
+               "Name": "overlay",
+               "Data": {
+                    "LowerDir": "/var/lib/containers/storage/overlay/64255e118e9b866cec3c4be4cae8ec452434cc57212d5cf919aa5f0fbc268b1e/diff:/var/lib/containers/storage/overlay/ef1860d25b61c4501d90873a00cf1e6bffbee4ad130bc2df82e8591878ebe294/diff:/var/lib/containers/storage/overlay/28620ddf596dd4f464676d0ab95abed635b392d5b6b2c90e01e97449fae51e17/diff",
+                    "UpperDir": "/var/lib/containers/storage/overlay/29896e953ed7e3258ea54afaf30a697acb2c38dd83021b661834ad70a5035a4c/diff",
+                    "WorkDir": "/var/lib/containers/storage/overlay/29896e953ed7e3258ea54afaf30a697acb2c38dd83021b661834ad70a5035a4c/work"
+               }
+          },
+          "RootFS": {
+               "Type": "layers",
+               "Layers": [
+                    "sha256:28620ddf596dd4f464676d0ab95abed635b392d5b6b2c90e01e97449fae51e17",
+                    "sha256:c73ba278d83bbaab9c8c78267b535e233f094b477cca13dacea52774b42657b8",
+                    "sha256:f8729a5b327c6c451f9d08d282d2ebd0ea71afdd68287d661120edf5e26a606e",
+                    "sha256:dad5cad237a64bcab5545d4e700bc5e300109f8ef8946701253bb82e043b2a8e"
+               ]
+          },
+          "Labels": {
+               "architecture": "x86_64",
+               "build-date": "2022-06-22T16:57:38.888525",
+               "com.redhat.build-host": "cpt-1001.osbs.prod.upshift.rdu2.redhat.com",
+               "com.redhat.component": "httpd-24-container",
+               "com.redhat.license_terms": "https://www.redhat.com/en/about/red-hat-end-user-license-agreements#rhel",
+               "description": "Apache httpd 2.4 available as container, is a powerful, efficient, and extensible web server. Apache supports a variety of features, many implemented as compiled modules which extend the core functionality. These can range from server-side programming language support to authentication schemes. Virtual hosting allows one Apache installation to serve many different Web sites.",
+               "distribution-scope": "public",
+               "io.k8s.description": "Apache httpd 2.4 available as container, is a powerful, efficient, and extensible web server. Apache supports a variety of features, many implemented as compiled modules which extend the core functionality. These can range from server-side programming language support to authentication schemes. Virtual hosting allows one Apache installation to serve many different Web sites.",
+               "io.k8s.display-name": "Apache httpd 2.4",
+               "io.openshift.expose-services": "8080:http,8443:https",
+               "io.openshift.s2i.scripts-url": "image:///usr/libexec/s2i",
+               "io.openshift.tags": "builder,httpd,httpd-24",
+               "io.s2i.scripts-url": "image:///usr/libexec/s2i",
+               "maintainer": "SoftwareCollections.org <sclorg@redhat.com>",
+               "name": "rhel9/httpd-24",
+               "release": "201",
+               "summary": "Platform for running Apache httpd 2.4 or building httpd-based application",
+               "url": "https://access.redhat.com/containers/#/registry.access.redhat.com/rhel9/httpd-24/images/1-201",
+               "usage": "s2i build https://github.com/sclorg/httpd-container.git --context-dir=examples/sample-test-app/ rhel9/httpd-24 sample-server",
+               "vcs-ref": "259c7eedd1c6772a827dbf4213e6c592ca509365",
+               "vcs-type": "git",
+               "vendor": "Red Hat, Inc.",
+               "version": "1"
+          },
+          "Annotations": {},
+          "ManifestType": "application/vnd.docker.distribution.manifest.v2+json",
+          "User": "1001",
+          "History": [
+               {
+                    "created": "2022-06-22T05:51:28.464771162Z",
+                    "comment": "Imported from -"
+               },
+               {
+                    "created": "2022-06-22T05:51:41.944928Z"
+               },
+               {
+                    "created": "2022-06-22T13:57:57.646366Z"
+               },
+               {
+                    "created": "2022-06-22T16:58:20.684611Z"
+               }
+          ],
+          "NamesHistory": [
+               "registry.redhat.io/ubi9/httpd-24:1-201"
+          ]
+     }
+]

@@ -1,0 +1,122 @@
+########################################### Container Mgmt ################################
+
+# Crun
+It is used for container management stuff like:
+	namespaces
+	allocation, etc.
+
+# Pdman
+Container Adminitration tool similar to docker
+it does not need previledged access
+
+# Skopeo
+inspecting container images (from repositories)
+
+# buildah
+Creating Images from dockerfile or from scratch
+
+# Registry config
+/etc/containers/registers.conf
+
+# inspecting image
+to inspect images or to pull images from redhat.registry.io first we have to login via podman as well as skopeo seperately
+inpspection of image tells us info before we can pull the image from the registry.
+
+# inspection things
+
+"RepoTags":	It is the tag that defines the specific release to pull from the registry (similar to version of
+		a same image) by default is uses "latest" tag if no tag is provided. otherwise you have to 
+		provide tag with it's syntax. i.e. image-name:tag. 
+		example centos:7 or centos:latest or centos:9.2
+
+"exports":	Theese are the services or ports that are marked to be used by image.
+
+"default env":	Theese are also known as wrapper scritps or env variables that defines the default behaviour of a 
+		image.
+
+Note:	the difference between skopeo and podman inspect is that podman uses pulled image to inspect while skopeo can inspect
+	image direclty from registry.
+
+
+################### podman image
+#
+"config":	Default configuration such as user, uid, env variables that will be used.
+"Cmd": 		Commands that will be run after the container starts.
+
+################################################################ Commands #############################################################
+
+$  dnf install @"Container Management" -y
+$  dnf groupinstall "Container Management" -y
+$  dnf install skopeo
+$  podman search ubi9 > ubi9-search-results
+$  vi /etc/containers/registries.conf
+$  podman search ubi9 >> ubi9-search-results
+$  podman login registry.redhat.io 
+$  podman pull registry.redhat.io/ubi9/ubi-minimal # to pull the image 
+$  skopeo login registry.redhat.io # to login to skopeo for inspection of registry images
+$  skopeo inspect docker://registry.redhat.io/ubi9/httpd-24 > skopeo-sample-output # inspecting a sample image from a registry. here 'docker://' is mandatory for skopeo althouth it can be omitted for podman.
+$  podman pull registry.redhat.io/ubi9/httpd-24:1-201 # pulling a sample image to inspect a from a registry. 
+$  podman images # list images in local storage
+$  podman image rm registry.redhat.io/ubi9/httpd-24:latest # removing images from local storage
+$  podman inspect registry.redhat.io/ubi9/httpd-24:1-201 > podman-inspect-ubi9-httpd-24-1-201 # inspecting a sample image from a local storage. 
+
+################################################################################################################################
+#                                                                                                                              #
+############################################## Stop/start/running containers ###################################################
+#                                                                                                                              #
+################################################################################################################################
+
+# Default storage 
+~/.local/share/containers # rootless
+/var/lib/containers # rootful
+
+
+Note:	'z' is used to define the selinux context to the folder that is attached to the container
+	the diffrenece in 'z' and 'Z' is that with 'z' folder can be used by multple container while 'Z' does not allows the 
+	access of a folder to multiple containers. It only allows access to the current running instance
+
+############################################## Commnads ##########################################################
+$  podman ps -a # list all containers
+$  podman ps # list running containers containers
+$  podman images # list images pulled to local storage
+$  podman images >> images-ls # list images pulled to local storage
+$  podman images # list images pulled to local storage
+$  podman run 9bc4438c0d4b 
+$  podman run 9bc4438c0d4b # runs the image
+$  podman run d1a1af5ad0ce # runs the image
+$  podman ps # lists runnign container
+$  podman ps -a # lists all containers
+$  podman rm *
+$  podman rm 0e99
+$  podman rm 47 # remove stopped containers
+$  podman rm 24 # remove stopped containers
+$  podman ps -a # lists all containers
+$  podman run d1a1af5ad0ce # runs the image
+$  podman ps -a # lists all containers
+$  podman rm -a # remove all containers
+$  podman images
+$  podman run -it --name my-con d1a1af5ad0ce /bin/bash # to run a container in interactive mode
+$  podman ps 
+$  podman ps -a
+$  podman start my-con 
+$  podman ps 
+$  podman start my-con # to start the container
+$  podman stop my-con # to stop the running container
+$  podman ps 
+$  podman ps -a
+$  podman start my-con # to start the container
+$  podman kill my-con 
+$  podman kill my-con # to kill the running processes inside the container
+$  podman rm -a
+$  podman run --name myhttpd -d -p 4080:8080 9bc4438c0d4b 
+$  curl localhost:4080
+$  firewall-cmd --permanent --add-port=4080/tcp 
+$  firewall-cmd --reload 
+$  podman stop myhttpd 
+$  podman ps 
+$  podman ps -a
+$  mkdir -p /home/student/webdoc
+$  touch /home/student/webdoc/index.html
+$  vi /home/student/webdoc/index.html
+$  chown -R student:wheel /home/student/webdoc/
+$  podman run --name myhttpd1 -d -p 4080:8080 -v /home/student/webdoc/:/var/www/html:z 9bc4438c0d4b # attaching persistent storage to a container

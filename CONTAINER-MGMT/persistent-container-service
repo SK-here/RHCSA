@@ -1,0 +1,55 @@
+######################### MAKING CONTAINER PERSISTENT #########################
+
+############################### Containerfile ##################################
+
+FROM registry.redhat.io/ubi9/ubi-minimal:9.1.0
+
+RUN microdnf install -y nginx
+
+RUN rm -rf /usr/share/nginx/html/*
+
+# Local Storage   # Container Storage
+COPY index.html /usr/share/nginx/html/
+
+COPY startup.sh /
+
+EXPOSE 80
+
+CMD ./startup.sh
+
+################################ startup.sh ###################################
+
+#!/bin/bash
+
+if [ ! -z "$CUSTOM_MSG" ] && [ ! -f /CUSTOM_MSG.done ]; then
+	echo -e "Custom Message: $CUSTOM_MSG" >> /usr/share/nginx/html/index.html
+	touch /CUSTOM_MSG.done
+fi
+
+exec /usr/sbin/nginx -g "daemon off;"
+
+################################ index.html ###################################
+
+<h1> - SK - </h1>
+
+############################### COMMANDS ######################################
+
+$  podman login registry.redhat.io
+$  loginctl enable-linger natasha
+$  podman login registry.redhat.io
+$  mkdir nginx
+$  vi Containerfile
+$  touch index.html startup.sh
+$  vi index.html 
+$  vi startup.sh 
+$  chmod +x startup.sh 
+$  podman build -t my-nginx:test .
+$  podman run -d --name my-con -p 4080:80 -e CUSTOM_MSG="Hola !" my-nginx:test 
+$  podman ps
+$  mkdir -p ~/.config/systemd/user
+$  podman generate systemd --name my-con --files --new
+$  systemctl --user daemon-reload 
+$  systemctl enable --now --user container-my-con.service 
+$  systemctl status --user container-my-con.service 
+$  podman stop my-con 
+$  podman ps

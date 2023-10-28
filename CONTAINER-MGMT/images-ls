@@ -1,0 +1,3 @@
+REPOSITORY                           TAG         IMAGE ID      CREATED        SIZE
+registry.redhat.io/ubi9/ubi-minimal  latest      d1a1af5ad0ce  8 days ago     97.4 MB
+registry.redhat.io/ubi9/httpd-24     1-201       9bc4438c0d4b  16 months ago  387 MB
