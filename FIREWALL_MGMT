@@ -1,0 +1,67 @@
+$  firewall-cmd --add-service={ssh,http,https}
+$  firewall-cmd --remove-service={https}
+$  firewall-cmd --remove-service=https
+$  firewall-cmd --get-services 
+$  firewall-cmd --list
+$  firewall-cmd --get-default-zone 
+$  firewall-cmd --get-active-zones 
+$  firewall-cmd --list-services 
+$  firewall-cmd --list-services --zone=public 
+$  firewall-cmd --list-services --zone=work 
+$  firewall-cmd --list-services --zone=drop --
+$  firewall-cmd --list-services --zone=drop 
+$  firewall-cmd --list-services --zone=trusted 
+$  firewall-cmd --list-all-zones 
+$  firewall-cmd --get-default-zone 
+$  firewall-cmd --get-active-zones 
+$  firewall-cmd --get-zone-of-interface=
+$  firewall-cmd --get-zone-of-interface=enp0s8
+$  firewall-cmd --get-zone-of-interface=enp0s3
+$  firewall-cmd --get-zones
+$  firewall-cmd --get-services
+$  firewall-cmd --list-ports 
+$  firewall-cmd --list-all
+$  firewall-cmd --get-default-zone 
+$  firewall-cmd --get-active-zones 
+$  firewall-cmd --add-port={32/tcp,43/tcp,93/udp,45/tcp}
+$  firewall-cmd --list-ports 
+$  firewall-cmd --permanent --new-zone=custom
+$  firewall-cmd --add-port={32/tcp,43/tcp,93/udp,45/tcp} --custom
+$  firewall-cmd --add-port={32/tcp,43/tcp,93/udp,45/tcp} --zone=custom
+$  firewall-cmd --reload 
+$  firewall-cmd --add-port={32/tcp,43/tcp,93/udp,45/tcp} --zone=custom --
+$  firewall-cmd --add-port={32/tcp,43/tcp,93/udp,45/tcp} --zone=custom
+$  firewall-cmd --get-zone
+$  firewall-cmd --get-zones
+$  firewall-cmd --add-source 192.168.65.21/24 --zone=custom 
+$  firewall-cmd --add-source 3e:6f:22:67:c2:2c:10 --zone=custom 
+$  firewall-cmd --add-source 3e:6f:22:67:c2:2c --zone=custom 
+$  firewall-cmd --list-source
+$  firewall-cmd --list-sources
+$  firewall-cmd --permanent --add-source 3e:6f:22:67:c2:2c --zone=custom 
+$  firewall-cmd --permanent --add-source 192.168.65.21/24 --zone=custom 
+$  firewall-cmd --add-service={ssh,dns,dhcp.chcpv6-client,cockpit,bitcoin} --permanent --zone=custom 
+$  firewall-cmd --add-service={ssh,dns,dhcp.dhcpv6-client,cockpit,bitcoin} --permanent --zone=custom 
+$  firewall-cmd --add-service={ssh,dns,dhcp,dhcpv6-client,cockpit,bitcoin} --permanent --zone=custom 
+$  firewall-cmd --list-all --zone=custom 
+$  firewall-cmd --permanent --add-service={ssh,dns,dhcp,dhcpv6-client,cockpit,bitcoin} --permanent --zone=custom 
+$  firewall-cmd --add-interface=enp0s3 --zone=custom 
+$  firewall-cmd --reload 
+$  firewall-cmd --list-all --zone=custom 
+$  firewall-cmd --add-port={22/tcp,80/tcp,21,udp,45/tcp,53/udp}
+$  firewall-cmd --add-port={22/tcp,80/tcp,21,udp,45/tcp,53/udp} --permanent  --zone=custom 
+$  firewall-cmd --permanent --add-port={22/tcp,80/tcp,21/udp,45/tcp,53/udp} --zone=custom 
+$  firewall-cmd --reload 
+$  firewall-cmd --list-all --zone=custom 
+$  firewall-cmd --add-protocol=icmp 
+$  firewall-cmd --add-protocol=ipv4
+$  firewall-cmd --add-protocol=ipv6
+$  firewall-cmd --add-protocol=ipv6-icmp
+$  firewall-cmd --add-protocol=icmp --permanent --zone=custom 
+$  firewall-cmd --add-protocol={ipv6-icmp,ipv4,ipv6} --permanent --zone=custom 
+$  firewall-cmd --reload 
+$  firewall-cmd --list-all
+$  firewall-cmd --add-forward --zone=custom 
+$  firewall-cmd  --permanent --zone=custom 
+$  firewall-cmd --reload 
+$  firewall-cmd --list-all --zone=custom 
