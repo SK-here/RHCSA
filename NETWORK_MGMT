@@ -1,0 +1,71 @@
+####################################### Netwrok Management #########################
+
+sudo nmcli connection add con-name test type ethernet ifname enp0s3 ipv4.method manual ip4 10.0.2.22/24 gw4 10.0.2.2 ipv4.dns 10.0.2.3,8.8.8.8 ipv4.dns-search serverb.lab.example.com
+
+################################
+man nmcli-examples
+man nmcli
+
+###############################
+
+Commands:
+
+ip --color addr or (ip -c a)
+nmcli
+nmtui
+systemctl restart NetworkManager
+
+###########################################
+
+Example:
+
+commands:
+nmcli connection add
+nmcli connection modify
+nmcli connection delete
+
+abbrivations:
+nmcli con add con-name <connection-name>
+nmcli con modify <connection-name>
+nmcli con del <connection-name>
+nmcli con show <connection-name>
+nmcli con show --active
+
+commmon attributes: (For Ethernet)
+ipv4.addresses	or ip4	192.168.45.x/cidr-mask
+ipv4.gateway	or gw4	192.168.45.1
+ifname		<interface-name>
+ipv4.method	manual (for static n/w)/ auto (for DHCP)
+type		ethernet (Connection type)
+ipv4.dns	DNS IP (192.168.45.1)
+ipv4.dns-search	Namesearver (something.example.com)
+
+############## Config Files ####################
+
+Nmcli Config Files
+# ~< 8.x
+/etc/sysconfig/network-scripts/*-ifcfg
+
+# ~> 9.x
+/etc/NetworkManager/system-connections/*.nmconnection
+
+# DNS Config
+/etc/resolv.conf
+>_
+# localhost localdomain
+# localhost localdomain
+192.168.45.xx	host-name
+
+# nsconfig
+/etc/nsswitch.conf
+>_
+hosts:		files dns myhostname # Default Config (you can change the priority)
+
+
+# Example:
+systemctl edit httpd.service
+>_
+[Unit]
+after=network.target # Starts the service if network is availaible
+
+systemctl restart httpd
