@@ -1,0 +1,77 @@
+$  fdisk /dev/sde 
+$  fdisk /dev/sdd 
+$  fdisk -l
+$  fdisk -l /dev/sd{d,e}
+$  cfdisk /dev/sdd
+$  fdisk -l /dev/sdd
+$  cfdisk /dev/sdc
+$  cfdisk /dev/sdd
+$  cfdisk /dev/sde
+$  vi /etc/fstab 
+$  blkid | grep -E "MYFAT|UUID"
+$  blkid | grep -E "MYFAT"
+$  blkid | grep -E "MYFAT" | grep -E "UUID"
+$  tree /mnt/
+$  fdisk /dev/sde 
+$  fdisk /dev/sdd
+$  cfdisk /dev/sdd
+$  fdisk /dev/sdd
+$  df -Th
+$  dnf install dosfstools
+$  dnf install dosfstools -y
+$  mkfs.vfat -f4 /dev/sdd1 # -f is used to define file block size 
+$  fatlabel /dev/sdd1 MYFAT # for better compatibility with vFAT use UPPERCASE but for RHCSA Exam do exactly as per asked
+$  fatlabel /dev/sdd1 MYFAT
+$  mkfs.vfat /dev/sdd1 # -f is used to define file block size 
+$  fatlabel /dev/sdd1 MYFAT
+$  mkfs.ext4 /dev/sdd2
+$  mkfs.ext4 /dev/sdd2 # for vdo drive use -E nodiscard option before formatting
+$  e2label /dev//sdd2 MYEXT
+$  e2label /dev/sdd2 MYEXT
+$  e2label /dev/sdd2 MYEXT4
+$  e2label /dev/sdd2 MYEXT4 # labelling the ext4 partition 
+$  mkfs.xfs -f /dev/sdd3 # -f is used to force to write the partiotin even if another FS exists otherwise it exits without writing changes if FS is detected, -K is similar to nodiscard option
+$  xfs_admin -L MYXfS /dev/sdd3 # To label the partiotion
+$  blkid
+$  mkdir -p /mnt/{myfat,myext4,myxfs}
+$  vi /etc/fstab 
+$  df -Th
+$  mount -a
+$  df -Th
+$  fdisk /dev/sdd2
+$  fdisk /dev/sdd
+$  blkid | grep MYEXT4 > uuid
+$  vi uuid 
+$  vi /etc/fstab 
+$  mount -a
+$  df -Th
+
+############################################################ /etc/fstab Entry #######################################
+
+
+#
+# /etc/fstab
+# Created by anaconda on Tue Oct 10 03:52:31 2023
+#
+# Accessible filesystems, by reference, are maintained under '/dev/disk/'.
+# See man pages fstab(5), findfs(8), mount(8) and/or blkid(8) for more info.
+#
+# After editing this file, run 'systemctl daemon-reload' to update systemd
+# units generated from this file.
+#
+/dev/mapper/rhel-root   /                       xfs     defaults        0 0
+UUID=3216005b-5d3c-43f2-88df-15106eaafbd6 /boot                   xfs     defaults        0 0
+/dev/mapper/rhel-swap   none                    swap    defaults        0 0
+
+# RHEL Repo Content
+/dev/sdb1	/content	xfs	defaults	0 0
+
+# By label
+LABEL=MYFAT	/mnt/myfat	vfat	defaults	0 0
+
+# By partition name
+# Note: This method is not recommended bcz once the partiotion changes the name can be diffrent
+/dev/sdd3	/mnt/myxfs	xfs	defaults	0 0
+
+# By UUID
+UUID=457adf51-094e-4c8c-ace4-50b939d2fd04	/mnt/myext4	ext4	acl	0 0
