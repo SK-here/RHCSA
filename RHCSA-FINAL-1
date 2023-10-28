@@ -1,0 +1,244 @@
+$  dnf install @"Container Management" skopeo -y
+$  podman login registry.redhat.io
+$  skopeo login registry.redhat.io
+$  skopeo inspect centos:7
+$  vi /etc/containers/registries.conf
+$  podman search centos:7
+$  podman search centos:7 | less
+$  podman search centos | less
+$  skopeo inspect quay.io/centos/centos:7
+$  skopeo inspect quay.io/centos/centos
+$  skopeo inspect quay.io/centos/
+$  skopeo inspect docker://quay.io/centos/centos:7
+$  skopeo inspect docker://quay.io/centos/centos:7 | less
+$  skopeo inspect docker://quay.io/centos/centos | less
+$  skopeo inspect docker://quay.io/centos/centos:7 | less
+$  podman pull docker://quay.io/centos/centos:7 
+$  podman search httpd
+$  podman search ubi9/ubi9
+$  podman search ubi9 | less
+$  podman search registry.redhat.io/ubi9 | less
+$  podman search registry.redhat.io/ubi9/ubi-minimal | less
+$  skopeo inspect registry.redhat.io/ubi9/ubi-minimal | less
+$  skopeo inspect docker://registry.redhat.io/ubi9/ubi-minimal | less
+$  vi .bashrc
+$  source .bashrc
+$  scp .bashrc root@serverb:/root/
+$  scp .bashrc root@192.168.29.252:/root/
+$  podman pull registry.redhat.io/ubi9/ubi-minimal
+$  useradd admin
+$  passwd admin 
+$  su - admin 
+$  ls -l /run/containers/1004/auth.json
+$  cd /run/containers/
+$  ls
+$  cd 
+$  su - admin 
+$  mkdir -p /run/containers/1004/
+$  touch /run/containers/1004/auth.json
+$  chown -R admin:admin /run/containers/1004
+$  su - admin 
+$  usermod -aG wheel admin 
+$  su - admin 
+$  vi /etc/passwd
+$  vi /etc/groups
+$  vi /etc/group
+$  ls /home/
+$  rm -rf /home/harry/ /home/sarah/
+$  cat .bashrc > /etc/.bashrc 
+$  cat .bashrc > /home/admin/.bashrc 
+$  ls -lhtra /run
+$  ls -lhtr /run
+$  ls -l /run
+$  clear
+$  ls -l /run
+$  su - admin 
+$  ssh admin@192.168.29.251
+$  nmcli con show 
+$  nmcli con add redhat
+$  nmcli con add con-name redhat 
+$  nmcli con add con-name redhat type ethernet 
+$  nmcli connection modify redhat type ethernet ifname enp0s8 ip4 172.25.250.10/24 gw4 172.25.250.254 ipv4.dns 172.25.250.254 ipv4.dns-search servera.lab.example.com
+$  nmcli connection up enp0s3
+$  mcli connection up enp0s3
+$  nmcli connection up redhat 
+$  nmcli connection up RHEL 
+$  ip -c a
+$  vi .bashrc 
+$  source .bashrc 
+$  l
+$  source .bashrc 
+$  vi .bashrc 
+$  source .bashrc
+$  nmcli con up SERVERA 
+$  source .bashrc
+$  vi .bashrc
+$  source .bashrc 
+$  source ~/.bashrc 
+$  reboot
+$  vi .bashrc
+$  :wq
+$  reboot
+$  vi .bashrc
+$  source .bashrc
+$  vi .bashrc
+$  source .bashrc
+$  vi .bashrc
+$  vi .bashrc 
+$  cat fancy-terminal >> .bashrc 
+$  vi .bashrc 
+$  source .bashrc
+$  groupadd sysadms
+$  for i in {1..3}; do useradd -G sysadms {natasha,harry,sarah} done
+$  for i in {1..3}; do useradd -G sysadms {natasha,harry,sarah} done;
+$  for i in {1..3} do; useradd -G sysadms {natasha,harry,sarah} done;
+$  useradd -G sysadms natasha
+$  useradd -G sysadms harry
+$  useradd -f -G sysadms harry
+$  useradd -G sysadms -f harry
+$  useradd -G sysadms harry
+$  passwd natasha 
+$  passwd harry 
+$  crontab -u natasha -e
+$  journalctl -f 
+$  su - natasha 
+$  clear
+$  ls
+$  cat fancy-terminal > /etc/skel/.bashrc 
+$  mkdir /home/manager
+$  chown :sysadms /home/manager/
+$  ls -l /home/manager/
+$  ls -l /home/manager
+$  touch /home/manager/file1
+$  ls -l /home/manager
+$  chown -R :sysadms /home/manager/
+$  ls -l /home/manager
+$  vi /etc/group
+$  su - natasha 
+$  chgrp sysadms /home/manager/
+$  chmod 2770 /home/manager/
+$  su - natasha 
+$  dnf install autofs -y
+$  vi /etc/auto.master
+$  vi /etc/auto.misc 
+$  systemctl restart autofs.service 
+$  systemctl enable --now autofs.service 
+$  vi /etc/login.defs 
+$  vim /etc/sudoers
+$  su - natasha 
+$  ssh natasha@192.168.29.251
+$  usermod -aG wheel natasha 
+$  history 
+$  history  > rhcsa-final
+$  journalctl -f
+$  journalctl -qf
+$  touch /home/manager/file1
+$  touch /home/manager/file2
+$  ls -l /home/manager/
+$  ls -ld /home/manager/
+$  cd /home/manager/
+$  ls
+$  touch file2
+$  ls -l
+$  echo "EX200 Pass progress result" > ex200
+$  chmod +x ex200 
+$  vi ex200 
+$  ./ex200 
+$  vi ex200 
+$  ./ex200 
+$  vi .bashrc 
+$  source .bashrc 
+$  touch files
+$  ls
+$  ll
+$  mkdir folder
+$  ll
+$  vi .bashrc 
+$  umask 277
+$  touch filesa
+$  ll
+$  mkdir dir
+$  ll
+$  skopeo registry.redhat.io/ubi9/ubi-minimal
+$  skopeo login registry.redhat.io
+$  podman pull registry.redhat.io/ubi9/ubi-minimal
+$  podman login registry.redhat.io
+$  skopeo login registry.redhat.io
+$  ls -lhtra /run/ontainers/1004/auth.json
+$  skopeo login registry.redhat.io
+$  touch /run/ontainers/1004/auth.json
+$  mkdir -p /run/ontainers/1004/
+$  skopeo login registry.redhat.io
+$  sudo skopeo login registry.redhat.io
+$  skopeo inspect docker://registry.redhat.io/ubi9/ubi-minimal
+$  sudo skopeo inspect docker://registry.redhat.io/ubi9/ubi-minimal
+$  podman pull registry.redhat.io/ubi9/ubi-minimal
+$  podman inspect registry.redhat.io/ubi9/ubi-minimal | less
+$  podman inspect registry.redhat.io/ubi9/ubi-minimal:1-201 | less
+$  podman pull registry.redhat.io/ubi9/ubi-minimal:1-201 | less
+$  podman pull registry.redhat.io/ubi9/ubi:1-201
+$  podman pull registry.redhat.io/ubi9/ubi9:1-201
+$  podman login registry.redhat.io 
+$  podman pull quay.io/centos/centos:7
+$  podman images
+$  systemctl status podman
+$  systemctl start podman
+$  systemctl enable --now podman
+$  systemctl status podman
+$  podman images
+$  loginctl enable-linger 1004
+$  podman images
+$  ls -ldZ ../
+$  ls
+$  rm bashrc customAlias fancy-terminal 
+$  ls
+$  mkdir webdocs
+$  touch webdocs/file{1..6}
+$  ls webdocs/
+$  podman images
+$  podman run -it --name my-con -v /home/admin/webdocs:/root/:z /bin/bash
+$  podman run -it --name my-con -v /home/admin/webdocs:/root/:z quay.io/centos/centos:7  /bin/bash
+$  podman ps 
+$  podman attach my-con 
+$  podman ps 
+$  podman ps -a
+$  podman start my-con 
+$  podman ps 
+$  podman attach my-con 
+$  podman start my-con 
+$  podman kill my-con 
+$  podman ps -a
+$  ls
+$  ls webdocs/
+$  mkdir -p ~/.config/systemd/user
+$  cd ~/.config/systemd/user
+$  podman generate systemd --name my-con --files --new 
+$  cd
+$  systemctl --user daemon-reload 
+$  systemctl enable --user container-my-con.service 
+$  systemctl start --user container-my-con.service 
+$  systemctl status --user container-my-con.service 
+$  podman ps
+$  podman kill my-con 
+$  podman ps
+$  mkdir webdocs1
+$  touch webdocs1/file{1..6}
+$  podman run -it --name my-con1 -v /home/admin/webdocs1:/root/ /bin/bash
+$  podman run -it --name my-con1 -v /home/admin/webdocs1:/root/ quay.io/centos/centos:7 /bin/bash
+$  chmod -R 777 webdocs1/
+$  podman attach my-con1
+$  podman start my-con1
+$  podman attach my-con1
+$  ls -l webdocs1
+$  tree webdocs1
+$  ls
+$  podman run -it --name my-con2 -v /home/admin/webdocs1:/root/ quay.io/centos/centos:7 /bin/bash
+$  podman ps
+$  podman ps -a
+$  podman rm my-con1
+$  podman rm my-con2
+$  ls
+$  podman ps
+$  rm -rf webdocs1
+$  vi /etc/chrony.conf 
+$  sudo vi /etc/chrony.conf 
