@@ -1,0 +1,7 @@
+$  journalctl --no-pager | grep "/log/journal" | tail
+$  vi /etc/systemd/journald.conf 
+$  mkdir -p /var/log/journal
+$  systemctl restart systemd-journald
+$  systemctl status systemd-journald
+$  journalctl --flush 
+$  systemctl status systemd-journald
